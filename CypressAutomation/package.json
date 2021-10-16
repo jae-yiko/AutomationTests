@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^8.6.0"
+  },
+  "dependencies": {
+    "smtp-tester": "^1.2.0"
   }
 }
