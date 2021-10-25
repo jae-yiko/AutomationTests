@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^8.6.0"
+    "cypress": "^8.6.0",
+    "cypress-iframe": "^1.0.1"
   },
   "dependencies": {
     "smtp-tester": "^1.2.0"

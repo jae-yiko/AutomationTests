@@ -8,7 +8,7 @@ describe('SportsRecruits Test Suite', function(){
         //this is a baseUrl and located in cypress.json file
         cy.visit("/login/")
     })
-    it('I can visit the SportsRecruits login page	https://stage.sportsrecruits.com/login		', function(){
+    it('I can visit the SportsRecruits login page https://stage.sportsrecruits.com/login', function(){
         //checking to see if the correct url opened
         cy.url().should('include', '/login/')
     })
