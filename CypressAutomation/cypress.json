@@ -1,3 +1,4 @@
 {
-    "baseUrl": "https://stage.sportsrecruits.com"
+    "baseUrl": "https://stage.sportsrecruits.com",
+    "watchForFileChanges": false
 }
