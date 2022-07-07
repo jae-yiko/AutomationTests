@@ -1,5 +1,6 @@
 /// <reference types="Cypress"/>
-
+const typeEmail = Cypress.env('typeEmail')
+const continueBtn = Cypress.env('continueBtn')
 
 describe('SportsRecruits Test Suite', function(){
     beforeEach(()=>
@@ -18,10 +19,11 @@ describe('SportsRecruits Test Suite', function(){
     it('If I enter an email not in our system I receive an error', function(){
 
         //typing incorrect email 'notarealemail@sportsrecruits.com' in email input box
-        cy.get('[data-qa=type_email]').type('notarealemail@sportsrecruits.com')
+        // cy.get('[data-qa=type_email]').type('notarealemail@sportsrecruits.com')
+        cy.get(typeEmail).type('notarealemail@sportsrecruits.com')
 
         //click 'Continue' button
-        cy.get('[data-qa=continue_button]').click()   
+        cy.get(continueBtn).click()   
 
         //checking to see if there is an alert message
         cy.get('[data-dismiss=alert]').should('be.visible')
@@ -30,10 +32,10 @@ describe('SportsRecruits Test Suite', function(){
     it('If I enter an email not in our system the error correct message will be displayed', function(){
 
         //typing incorrect email 'notarealemail@sportsrecruits.com' in email input box
-        cy.get('[data-qa=type_email]').type('notarealemail@sportsrecruits.com')
+        cy.get(typeEmail).type('notarealemail@sportsrecruits.com')
 
         //click 'Continue' button
-        cy.get('[data-qa=continue_button]').click()  
+        cy.get(continueBtn).click()  
 
         //checking to see if the correct alert message is shown
         cy.contains("We couldn't find an account with this email. Don't have a SportsRecruits Profile yet? Click here to get started with a free student-athlete profile!").should('be.visible')
@@ -47,10 +49,10 @@ describe('SportsRecruits Test Suite', function(){
     it('If I click on the link in the error message I am brought to the signup page with the incorrect email from the login page already populated in the email field', function(){
         
         //typing incorrect email 'notarealemail@sportsrecruits.com' in email input box
-        cy.get('[data-qa=type_email]').type('notarealemail@sportsrecruits.com')
+        cy.get(typeEmail).type('notarealemail@sportsrecruits.com')
         
         //click 'Continue' button
-        cy.get('[data-qa=continue_button]').click()        
+        cy.get(continueBtn).click()        
         
         //checking to see if the correct alert message is shown
         cy.contains("We couldn't find an account with this email. Don't have a SportsRecruits Profile yet? Click here to get started with a free student-athlete profile!")
@@ -67,10 +69,10 @@ describe('SportsRecruits Test Suite', function(){
         
 
         //typing correct email 'automationtester@sportsrecruits.com' in email input box
-        cy.get('[data-qa=type_email]').type('automationtester@sportsrecruits.com')
+        cy.get(typeEmail).type('automationtester@sportsrecruits.com')
         
         //click 'Continue' button
-        cy.get('[data-qa=continue_button]').click()        
+        cy.get(continueBtn).click()        
         
         //verifying that the password field is present
         cy.get('[data-qa=password_field]').should('be.visible')
@@ -79,10 +81,10 @@ describe('SportsRecruits Test Suite', function(){
     it('If I enter the incorrect password a "Password is Incorrect" modal is present on the screen', function(){
         
         //typing correct email 'automationtester@sportsrecruits.com' in email input box
-        cy.get('[data-qa=type_email]').type('automationtester@sportsrecruits.com')
+        cy.get(typeEmail).type('automationtester@sportsrecruits.com')
         
         //click 'Continue' button
-        cy.get('[data-qa=continue_button]').click()        
+        cy.get(continueBtn).click()        
         
         //typing incorrect password 'incorrectPassword' in password input box
         cy.get('.login-password').type('incorrectPassword')
@@ -102,10 +104,10 @@ describe('SportsRecruits Test Suite', function(){
     it("If I click on 'Reset My Password' a 'We've sent you an email with instructions for resetting your password.' modal is present on the screen" , function(){
         
         //typing correct email 'automationtester@sportsrecruits.com' in email input box
-        cy.get('[data-qa=type_email]').type('automationtester@sportsrecruits.com')
+        cy.get(typeEmail).type('automationtester@sportsrecruits.com')
         
         //click 'Continue' button
-        cy.get('[data-qa=continue_button]').click()        
+        cy.get(continueBtn).click()        
         
         //typing incorrect password 'incorrectPassword' in password input box
         cy.get('.login-password').type('incorrectPassword')
@@ -128,10 +130,10 @@ describe('SportsRecruits Test Suite', function(){
     it("If I click on 'Reset My Password' a password reset email is sent to the correct email", function(){
         
         //typing correct email 'automationtester@sportsrecruits.com' in email input box
-        cy.get('[data-qa=type_email]').type('automationtester@sportsrecruits.com')
+        cy.get(typeEmail).type('automationtester@sportsrecruits.com')
         
         //click 'Continue' button
-        cy.get('[data-qa=continue_button]').click()        
+        cy.get(continueBtn).click()        
         
         //intercept provides response object
         cy.intercept
@@ -154,10 +156,10 @@ describe('SportsRecruits Test Suite', function(){
     it("If I click on 'Send Me a Link' a 'You will be receiving an email with your login link shortly!' message is present", function(){
         
         //typing correct email 'automationtester@sportsrecruits.com' in email input box
-        cy.get('[data-qa=type_email]').type('automationtester@sportsrecruits.com')
+        cy.get(typeEmail).type('automationtester@sportsrecruits.com')
         
         //click 'Continue' button
-        cy.get('[data-qa=continue_button]').click()        
+        cy.get(continueBtn).click()        
         
         //click 'Send Me a Link'
         cy.get('.login-request-magic-link').click()
@@ -171,39 +173,13 @@ describe('SportsRecruits Test Suite', function(){
         })
     })
 
-    it("If I click on 'Send Me a Link' a magic link is sent to the correct email", function(){
-        
-        //typing correct email 'automationtester@sportsrecruits.com' in email input box
-        cy.get('[data-qa=type_email]').type('automationtester@sportsrecruits.com')
-        
-        //click 'Continue' button
-        cy.get('[data-qa=continue_button]').click()        
-        
-        //intercept provides response object
-        cy.intercept
-        ({ 
-            method: 'POST',
-            url:'https://api-stage.sportsrecruits.com//api/v1/magic/send'
-        },
-        {
-            //200 status response indicates that the request has succeeded
-            statusCode: 200
-        }).as('sendLinkCheck')
-        
-        //click 'Send Me a Link' button
-        cy.get('.login-request-magic-link').click()
-        
-        //verifying the magic link was sent to the correct email
-        cy.wait('@sendLinkCheck').its('response.statusCode').should('eq', 200)
-    })  
-
     it('If I enter the correct email and password I am authenticated and able to log into the SportsRecruits platform', function(){
         
         //typing correct email 'automationtester@sportsrecruits.com' in email input box
-        cy.get('[data-qa=type_email]').type('automationtester@sportsrecruits.com')
+        cy.get(typeEmail).type('automationtester@sportsrecruits.com')
         
         //click 'Continue' button
-        cy.get('[data-qa=continue_button]').click()        
+        cy.get(continueBtn).click()        
         
         //typing correct password 'sportsrecruits' in password input box
         cy.get('.login-password').type('sportsrecruits')
